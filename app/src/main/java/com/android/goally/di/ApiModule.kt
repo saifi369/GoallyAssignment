@@ -1,6 +1,7 @@
 package com.getgoally.learnerapp.di
 
-import com.android.goally.data.network.rest.api.*
+import com.android.goally.data.network.rest.api.CopilotApi
+import com.android.goally.data.network.rest.api.GeneralApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,6 +17,12 @@ object ApiModule {
     @Provides
     fun provideGeneralApi(retrofit: Retrofit.Builder): GeneralApi {
         return retrofit.build().create(GeneralApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideCopilotApi(retrofit: Retrofit.Builder): CopilotApi {
+        return retrofit.build().create(CopilotApi::class.java)
     }
 
 }

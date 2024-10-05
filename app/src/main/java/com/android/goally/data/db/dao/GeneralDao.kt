@@ -11,4 +11,8 @@ interface GeneralDao {
     fun getAuthenticationLive(): LiveData<Authentication?>
     @Query("Select * from authentication")
     suspend fun getAuthentication(): Authentication?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun setAuthentication(authentication: Authentication)
+
 }

@@ -6,6 +6,7 @@ plugins {
     id 'com.google.dagger.hilt.android'
     id 'kotlin-kapt'
     id 'kotlin-android'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -58,6 +59,12 @@ android {
     kotlinOptions {
         jvmTarget = '17'
     }
+
+    testOptions {
+        unitTests.all {
+            useJUnitPlatform()
+        }
+    }
 }
 
 dependencies {
@@ -75,10 +82,20 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.5.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    testImplementation 'junit:junit:4.13.2'
+//    testImplementation 'junit:junit:4.13.2'
+    //JUnit 5
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-params:5.10.0'
+
+    testImplementation "androidx.arch.core:core-testing:2.2.0"
+    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.8.1"
+    testImplementation "org.jetbrains.kotlin:kotlin-test:2.0.10"
+    testImplementation 'com.jraska.livedata:testing-ktx:1.3.0'
+
+    testImplementation 'io.mockk:mockk:1.13.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
-
 
     //constraint layout
     implementation "androidx.constraintlayout:constraintlayout:2.1.4"
@@ -106,8 +123,8 @@ dependencies {
     implementation 'com.intuit.sdp:sdp-android:1.0.6'
 
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.4"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1"
 
     //network response - error handling
     implementation "com.github.haroldadmin:NetworkResponseAdapter:4.0.1"
@@ -121,7 +138,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-messaging-ktx:23.1.2'
 
 //    //glide - image downloader
-//    implementation 'com.github.bumptech.glide:glide:4.13.0'
+    implementation 'com.github.bumptech.glide:glide:4.16.0'
 //    ksp 'com.github.bumptech.glide:compiler:4.13.0'
 //    implementation 'com.github.2coffees1team:GlideToVectorYou:v2.0.0'
 
@@ -136,4 +153,10 @@ dependencies {
 //    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.webkit:webkit:1.7.0'
     kapt "androidx.room:room-compiler:2.5.2"
+
+    //Shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.google.android.material:material:1.8.0'
+
+    //
 }

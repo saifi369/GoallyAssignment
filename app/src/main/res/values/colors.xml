@@ -6,5 +6,11 @@
     <color name="retroPurple">#7325CE</color>
     <color name="white_onboarding">#FDFCFF</color>
     <color name="grey_onboarding">#7D8E97</color>
+    <color name="shimmerColor">#C2C2C2</color>
+    <color name="toolbarBackgroundColor">#D2F7E1</color>
+    <color name="toolbarBackButtonColor">#27AE60</color>
+    <color name="itemDividerColor">#CACACA</color>
+    <color name="filterTagColor">#D95182</color>
+    <color name="activityDetailItemColor">#F6F6F6</color>
 
 </resources>

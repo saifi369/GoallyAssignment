@@ -11,10 +11,12 @@ class GeneralRepo(
 ) {
 
     suspend fun checkHealth() = generalApi.checkHealth()
-    suspend fun getToken(userEmail:String) = generalApi.getToken(userEmail)
+    suspend fun getToken(userEmail: String) = generalApi.getToken(userEmail)
 
 
     fun getAuthenticationLive() = generalDao.getAuthenticationLive()
     suspend fun getAuthentication() = generalDao.getAuthentication()
 
+    suspend fun setAuthentication(authentication: Authentication) =
+        generalDao.setAuthentication(authentication)
 }

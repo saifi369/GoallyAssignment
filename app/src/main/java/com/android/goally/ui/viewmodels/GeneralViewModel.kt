@@ -16,15 +16,14 @@ class GeneralViewModel @Inject constructor(
 ) : ViewModel() {
 
     fun checkServerHealth(
-        onLoading: (Boolean) -> Unit,
-        onError: (String) -> Unit,
-        onSuccess: (String) -> Unit) {
+        onLoading: (Boolean) -> Unit, onError: (String) -> Unit, onSuccess: (String) -> Unit
+    ) {
         onLoading(true)
         viewModelScope.launch {
             when (val res = generalRepo.checkHealth()) {
                 is NetworkResponse.Success -> {
                     LogUtil.i(res.body.toString())
-                    if(res.body?.status.equals("ok", true)) {
+                    if (res.body?.status.equals("ok", true)) {
                         onSuccess("Server is up")
                     } else {
                         onError("Server is down")
@@ -54,21 +53,28 @@ class GeneralViewModel @Inject constructor(
         }
     }
 
-    fun getTokenFor(userEmail:String,
+    fun getTokenFor(
+        userEmail: String,
         onLoading: (Boolean) -> Unit,
         onError: (String) -> Unit,
-        onSuccess: () -> Unit) {
+        onSuccess: () -> Unit
+    ) {
         onLoading(true)
         viewModelScope.launch {
             when (val res = generalRepo.getToken(userEmail)) {
                 is NetworkResponse.Success -> {
                     LogUtil.i(res.body.toString())
                     res.body?.let {
-                        if(!it.token.isNullOrEmpty() && !it.name.isNullOrEmpty()){
-                            //save token here which will be used for further api calls
+                        if (!it.token.isNullOrEmpty() && !it.name.isNullOrEmpty()) {
+                            generalRepo.setAuthentication(
+                                Authentication(
+                                    name = it.name!!,
+                                    token = it.token
+                                )
+                            )
                             onSuccess()
                         }
-                    }?:run {
+                    } ?: run {
                         onError("Something went wrong")
                     }
                     onLoading(false)
